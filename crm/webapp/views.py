@@ -48,4 +48,12 @@ class Login(View):
                 return redirect('dashboard')
         context={'form':form}
         return render(request,self.template_name,context=context)
-                
+
+#dashboard
+class dashboard(View):
+    template_name='webapp/dashboard.html'
+    @login_required(login_url='login')
+    def get(self,request,*args,**kwargs):
+        records=Record.objects.all()
+        context={'records':records}
+        return render(request,self.template_name,context=context)
